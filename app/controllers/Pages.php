@@ -7,6 +7,9 @@ class Pages extends Controller
 
     public function index()
     {
+        if(isLoggedIn()){
+            redirect('vehicles');
+        }
 
         $data = [
             'title' => 'Vehicle info'
