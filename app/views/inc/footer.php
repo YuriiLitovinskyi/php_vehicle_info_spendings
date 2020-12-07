@@ -11,7 +11,7 @@
 
 <script src="<?php echo URLROOT; ?>/js/main.js"></script>
 
-<div class="text-muted footer fixed-bottom mt-5">
+<div class="text-muted fixed-bottom mt-5">
     <div class="container py-3">
         <small>&copy; Copyright 2020, Vehicle Info App</small>
     </div>
