@@ -32,4 +32,126 @@ class Vehicle
 
         return $results;
     }
+
+    public function addVehicle($data)
+    {
+        $this->db->query('INSERT INTO vehicle_info (
+            name, 
+            car_mileage, 
+            fuel, 
+            year_production, 
+            transmission, 
+            configuration, 
+            vin_number,
+            engine_capacity,
+            color,
+            producing_country,
+            vehicle_mass,
+            maximum_mass,
+            user_id
+            ) VALUES (
+                :name, 
+                :car_mileage, 
+                :fuel,
+                :year_production, 
+                :transmission, 
+                :configuration, 
+                :vin_number,
+                :engine_capacity,
+                :color,
+                :producing_country,
+                :vehicle_mass,
+                :maximum_mass,
+                :user_id
+                )
+        ');
+
+        // Bind values
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':car_mileage', $data['car_mileage']);
+        $this->db->bind(':fuel', $data['fuel']);
+        $this->db->bind(':year_production', $data['year_production']);
+        $this->db->bind(':transmission', $data['transmission']);
+        $this->db->bind(':configuration', $data['configuration']);
+        $this->db->bind(':vin_number', $data['vin_number']);
+        $this->db->bind(':engine_capacity', $data['engine_capacity']);
+        $this->db->bind(':color', $data['color']);
+        $this->db->bind(':producing_country', $data['producing_country']);
+        $this->db->bind(':vehicle_mass', $data['vehicle_mass']);
+        $this->db->bind(':maximum_mass', $data['maximum_mass']);
+        $this->db->bind(':user_id', $data['user_id']);
+
+        // Execute insert query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public function updateVehicle($data)
+    {
+        $this->db->query('UPDATE vehicle_info SET
+            name = :name, 
+            car_mileage = :car_mileage, 
+            fuel = :fuel, 
+            year_production = :year_production, 
+            transmission = :transmission, 
+            configuration = :configuration, 
+            vin_number = :vin_number,
+            engine_capacity = :engine_capacity,
+            color = :color,
+            producing_country = :producing_country,
+            vehicle_mass = :vehicle_mass,
+            maximum_mass = :maximum_mass         
+            WHERE id = :id         
+        ');
+
+        // Bind values
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':car_mileage', $data['car_mileage']);
+        $this->db->bind(':fuel', $data['fuel']);
+        $this->db->bind(':year_production', $data['year_production']);
+        $this->db->bind(':transmission', $data['transmission']);
+        $this->db->bind(':configuration', $data['configuration']);
+        $this->db->bind(':vin_number', $data['vin_number']);
+        $this->db->bind(':engine_capacity', $data['engine_capacity']);
+        $this->db->bind(':color', $data['color']);
+        $this->db->bind(':producing_country', $data['producing_country']);
+        $this->db->bind(':vehicle_mass', $data['vehicle_mass']);
+        $this->db->bind(':maximum_mass', $data['maximum_mass']);
+
+        // Execute insert query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getVehicleById($id)
+    {
+        $this->db->query('SELECT * FROM vehicle_info WHERE id = :id');
+
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
+    public function deleteVehicle($id)
+    {
+        $this->db->query('DELETE from vehicle_info WHERE id = :id');
+
+        $this->db->bind(':id', $id);
+
+        // Execute delete query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

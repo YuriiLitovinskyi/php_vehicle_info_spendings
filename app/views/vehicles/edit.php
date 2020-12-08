@@ -1,9 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
-<a href="<?php echo URLROOT ?>/vehicles" class="btn btn-link"><i class="fa fa-backward"></i> Back</a>
+<a href="<?php echo URLROOT ?>/vehicles/show/<?php echo $data['id']; ?>" class="btn btn-link"><i class="fa fa-backward"></i> Back</a>
 <div class="card card-body bg-light my-5 form-card">
-    <h2>Add New Vehicle</h2>
-    <p>You can add your new vehicle with this form</p>
-    <form action="<?php echo URLROOT; ?>/vehicles/add" method="POST">
+    <h2>Edit Vehicle Info</h2>
+    <p>You can change main vehicle info with provided form</p>
+    <form action="<?php echo URLROOT; ?>/vehicles/edit/<?php echo $data['id']; ?>" method="POST">
 
         <div class="form-group">
             <label for="name">Vehicle Brand: <sup>*</sup></label>
@@ -100,7 +100,7 @@
             <span class="invalid-feedback"><?php echo $data['maximum_mass_error']; ?></span>
         </div>
 
-        <input type="submit" class="btn btn-success" value="Submit">
+        <input type="submit" class="btn btn-success" value="Save changes">
     </form>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
