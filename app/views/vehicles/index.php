@@ -22,10 +22,18 @@
         </div>
 
         <p class="card-text">Adeed by: <?php echo $vehicle->userName; ?> on <?php echo $vehicle->vehicleCreated; ?></p>
-       
-        <a href="<?php echo URLROOT; ?>/vehicles/show/<?php echo $vehicle->vehicleId; ?>">
-            <button type="button" class="btn btn-info"><i class="fas fa-car"></i> See More Info</button>
-        </a>
+
+        <div class="row">
+            <div class="col-md-12">
+                <a href="<?php echo URLROOT; ?>/spendings/show/<?php echo $vehicle->vehicleId; ?>">
+                    <button type="button" class="btn btn-success"><i class="fas fa-money-bill-wave"></i> Monitor Spendings</button>
+                </a>     
+                <a href="<?php echo URLROOT; ?>/vehicles/show/<?php echo $vehicle->vehicleId; ?>">
+                    <button type="button" class="btn btn-info"><i class="fas fa-car"></i> See More Info</button>
+                </a>           
+            </div>           
+        </div>
+      
     </div>
 <?php endforeach; ?>
 <?php require APPROOT . '/views/inc/footer.php'; ?>
