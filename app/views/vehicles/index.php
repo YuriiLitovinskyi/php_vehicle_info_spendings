@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-6">
         <a href="<?php echo URLROOT; ?>/vehicles/add" class="btn btn-primary float-right">
-            <i class="fa fa-pen" aria-hidden="true"></i> Add New Vehicle
+        <i class="fas fa-plus"></i> Add New Vehicle
         </a>
     </div>
 </div>

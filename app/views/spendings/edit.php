@@ -1,9 +1,9 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <a href="<?php echo URLROOT ?>/spendings/show/<?php echo $data['vehicle_id']; ?>" class="btn btn-link"><i class="fa fa-backward"></i> Back</a>
 <div class="card card-body bg-light my-5 form-card">
-    <h2>Add New Item to Spendings</h2>
-    <p>You can add new item for your vehicle here</p>
-    <form action="<?php echo URLROOT; ?>/spendings/add/<?php echo $data['vehicle_id']; ?>" method="POST">
+    <h2>Update Item</h2>
+    <p>You can update current item with this form</p>
+    <form action="<?php echo URLROOT; ?>/spendings/edit/<?php echo $data['id']; ?>/<?php echo $data['vehicle_id']; ?>" method="POST">
 
         <div class="form-group">
             <label for="name">Item Name: <sup>*</sup></label>
@@ -23,7 +23,7 @@
             <span class="invalid-feedback"><?php echo $data['comments_error']; ?></span>
         </div>        
 
-        <button type="submit" class="btn btn-success"><i class="fas fa-plus-circle"></i> Save</button>  
+        <button type="submit" class="btn btn-success"><i class="fas fa-pencil-alt"></i> Update</button>
     </form>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

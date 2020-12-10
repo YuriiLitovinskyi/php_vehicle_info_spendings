@@ -100,7 +100,7 @@
             <span class="invalid-feedback"><?php echo $data['maximum_mass_error']; ?></span>
         </div>
 
-        <input type="submit" class="btn btn-success" value="Submit">
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save Vehicle</button>        
     </form>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

@@ -6,3 +6,10 @@ if (document.getElementById('msg-flash')) {
         document.getElementById('msg-flash').remove();
     }, flashMessageTimeout);
 };
+
+// Delete Spending Item
+function deleteSpendingItem(action){
+    const deleteItemForm = document.getElementById('deleteSpendingItemModalForm');
+    deleteItemForm.action = action;
+};
+

@@ -99,8 +99,8 @@
             <input type="number" name="maximum_mass" class="form-control form-control <?php echo (!empty($data['maximum_mass_error'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['maximum_mass']; ?>">
             <span class="invalid-feedback"><?php echo $data['maximum_mass_error']; ?></span>
         </div>
-
-        <input type="submit" class="btn btn-success" value="Save changes">
+        
+        <button type="submit" class="btn btn-success"><i class="far fa-save"></i> Save changes</button>
     </form>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

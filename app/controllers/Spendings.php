@@ -72,13 +72,15 @@ class Spendings extends Controller
             }          
 
             // Make sure no errors
-            if (empty($data['name_error'])   && empty($data['price_error']) && empty($data['comments_error'])) {                                       
+            if (empty($data['name_error']) && empty($data['price_error']) && empty($data['comments_error'])) {                                       
                 // Validated
                 if ($this->spendingModel->addSpending($data)) {
-                    flash('spendings_message', 'New item was added successfully!');
+                    flash('spendings_message', 'New item was added successfully');
                     redirect('spendings/show/' . $vehicle_id);
                 } else {
-                    die('Error! Could not add new item to spendings!');
+                    flash('spendings_message', 'Error! Could not add new item to spendings! Please try again', 'alert alert-danger');
+                    redirect('spendings/show/' . $vehicle_id);
+                    //die('Error! Could not add new item to spendings!');
                 }
                 
             } else {
@@ -98,6 +100,91 @@ class Spendings extends Controller
             ];
     
             $this->view('spendings/add', $data);
+        }
+    }
+
+    public function edit($id, $vehicle_id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            //Sanitize POST array
+            $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
+
+            $data = [
+                'id'=> $id,
+                'name' => trim($_POST['name']),
+                'comments' => trim($_POST['comments']),
+                'price' => trim($_POST['price']),
+                'vehicle_id' => $vehicle_id,               
+                'name_error' => '',
+                'comments_error' => '',
+                'price_error' => ''  
+            ];
+
+            // Validate input values
+            if (empty($data['name'])) {
+                $data['name_error'] = 'Please enter name of the item';
+            }
+
+            if (empty($data['price'])) {
+                $data['price_error'] = 'Please enter price of the item';
+            }
+
+            if (empty($data['comments'])) {
+                $data['comments_error'] = 'Please leave some comments about the item';
+            }          
+
+            // Make sure no errors
+            if (empty($data['name_error']) && empty($data['price_error']) && empty($data['comments_error'])) {                                       
+                // Validated
+                if ($this->spendingModel->editSpending($data)) {
+                    flash('spendings_message', 'Item was updated successfully', 'alert alert-primary');
+                    redirect('spendings/show/' . $vehicle_id);
+                } else {
+                    flash('spendings_message', 'Error! Could not update item! Please try again', 'alert alert-danger');
+                    redirect('spendings/show/' . $vehicle_id);
+                    //die('Error! Could not edit current item!');
+                }
+                
+            } else {
+                // Load view with errors
+                $this->view('spendings/edit', $data);
+            }
+
+        } else {
+            // Get existing Spending item from model
+            $item = $this->spendingModel->getSpendingById($id);         
+
+            $data = [
+                'id'=> $id,
+                'name' => $item->name,
+                'comments' => $item->comments,
+                'price' => $item->price,                             
+                'name_error' => '',
+                'comments_error' => '',
+                'price_error' => '',
+                'vehicle_id' => $vehicle_id 
+            ];
+    
+            $this->view('spendings/edit', $data);
+        }
+    }
+
+    public function delete($id, $vehicle_id)
+    {     
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+              // Get existing Vehicle from model
+            $item = $this->spendingModel->getSpendingById($id);
+            
+            if ($this->spendingModel->deleteSpending($id)) {
+                flash('spendings_message', 'Item was removed successfully', 'alert alert-info');
+                redirect('spendings/show/' . $vehicle_id);
+            } else {
+                flash('spendings_message', 'Error! Could not delete item! Please try again', 'alert alert-danger');
+                redirect('spendings/show/' . $vehicle_id);
+                //die('Error! Could not delete spending item!');
+            }
+        } else {
+            redirect('spendings/show/' . $vehicle_id);
         }
     }
 }

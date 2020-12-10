@@ -11,6 +11,7 @@ class Vehicles extends Controller
         // Load models
         $this->vehicleModel = $this->model('Vehicle');
         $this->userModel = $this->model('User');
+        $this->spendingModel = $this->model('Spending');
     }
 
     public function index()
@@ -98,10 +99,12 @@ class Vehicles extends Controller
                     
                     // Validated
                     if ($this->vehicleModel->addVehicle($data)) {
-                        flash('vehicle_message', 'Your new vehicle was added successfully!');
+                        flash('vehicle_message', 'Your new vehicle was added successfully');
                         redirect('vehicles');
                     } else {
-                        die('Error! Could not add new vehicle!');
+                        flash('vehicle_message', 'Error! Could not add new vehicle! Please try again', 'alert alert-danger');
+                        redirect('vehicles');
+                        //die('Error! Could not add new vehicle!');
                     }
                 
             } else {
@@ -203,10 +206,12 @@ class Vehicles extends Controller
                     
                     // Validated
                     if ($this->vehicleModel->updateVehicle($data)) {
-                        flash('vehicle_message', 'Vehicle info was updated successfully!');
+                        flash('vehicle_message', 'Vehicle info was updated successfully', 'alert alert-primary');
                         redirect('vehicles/show/' . $data['id']);
                     } else {
-                        die('Error! Could not edit vehicle!');
+                        flash('vehicle_message', 'Error! Could not update vehicle! Please try again', 'alert alert-danger');
+                        redirect('vehicles/show/' . $data['id']);
+                        //die('Error! Could not edit vehicle!');
                     }
                 
             } else {
@@ -269,11 +274,13 @@ class Vehicles extends Controller
                 redirect('vehicles');
             }
             
-            if ($this->vehicleModel->deleteVehicle($id)) {
-                flash('vehicle_message', 'Vehicle was removed successfully!');
+            if ($this->vehicleModel->deleteVehicle($id) && $this->spendingModel->deleteAllVehicleSpendings($id)) {
+                flash('vehicle_message', 'Vehicle was removed successfully', 'alert alert-info');
                 redirect('vehicles');
             } else {
-                die('Error! Could not delete vehicle!');
+                flash('vehicle_message', 'Error! Could not delete vehicle! Please try again', 'alert alert-danger');
+                redirect('vehicles');
+                //die('Error! Could not delete vehicle!');
             }
         } else {
             redirect('vehicles');

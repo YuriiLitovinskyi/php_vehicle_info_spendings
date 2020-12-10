@@ -58,4 +58,67 @@ class Spending
             return false;
         }
     }
+
+    public function editSpending($data)
+    {
+        $this->db->query('UPDATE spendings SET 
+            name = :name, 
+            price = :price, 
+            comments = :comments           
+            WHERE
+            id = :id            
+        ');
+
+        // Bind values
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':price', $data['price']);
+        $this->db->bind(':comments', $data['comments']);         
+
+        // Execute insert query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function getSpendingById($id)
+    {
+        $this->db->query('SELECT * FROM spendings WHERE id = :id');
+
+        $this->db->bind(':id', $id);
+
+        $row = $this->db->single();
+
+        return $row;
+    }
+
+    public function deleteSpending($id)
+    {
+        $this->db->query('DELETE from spendings WHERE id = :id');
+
+        $this->db->bind(':id', $id);
+
+        // Execute delete query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteAllVehicleSpendings($vehicle_id)
+    {
+        $this->db->query('DELETE from spendings WHERE vehicle_id = :vehicle_id');
+
+        $this->db->bind(':vehicle_id', $vehicle_id);
+
+        // Execute delete query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
