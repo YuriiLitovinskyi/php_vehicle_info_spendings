@@ -72,4 +72,36 @@ class User
 
         return $row;
     }
+
+    public function editProfile($data)
+    {
+        $this->db->query('UPDATE users SET name = :name, email = :email, password = :password WHERE id = :id');
+
+        // Bind values
+        $this->db->bind(':id', $data['id']);
+        $this->db->bind(':name', $data['name']);
+        $this->db->bind(':email', $data['email']);
+        $this->db->bind(':password', $data['password']);
+
+        // Execute insert query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteUserProfile($id)
+    {
+        $this->db->query('DELETE from users WHERE id = :id');
+
+        $this->db->bind(':id', $id);
+
+        // Execute delete query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -8,6 +8,12 @@ class Vehicles extends Controller
             redirect('users/login');
         }
 
+        // Check Expiration
+        if(checkSessionExpire()){
+            session_destroy();
+            redirect('users/login');
+        } 
+
         // Load models
         $this->vehicleModel = $this->model('Vehicle');
         $this->userModel = $this->model('User');

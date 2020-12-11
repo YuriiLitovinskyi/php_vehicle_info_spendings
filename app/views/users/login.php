@@ -3,6 +3,7 @@
     <div class="col-md-6 mx-auto">
         <div class="card card-body bg-light mt-5">
             <?php flash('register_success'); ?>
+            <?php flash('profile_change'); ?>
             <h2>Login</h2>
             <p>Please enter your email address and password for loggin in</p>
             <form action="<?php echo URLROOT; ?>/users/login" method="POST">

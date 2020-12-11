@@ -16,19 +16,9 @@ class Spendings extends Controller
 
     public function show($vehicle_id) 
     {
-        $vehicle = $this->vehicleModel->getVehicleById($vehicle_id);
-        // $user = $this->userModel->getUserById($vehicle->user_id);
-
-        // $data= [
-        //     'vehicle' => $vehicle,
-        //     'user' => $user
-        // ];
-
-        // $this->view('vehicles/show', $data);          //calculateTotalSpendings($vehicle_id)
+        $vehicle = $this->vehicleModel->getVehicleById($vehicle_id);       
 
         $totalVehicleSpendings = $this->spendingModel->calculateTotalSpendings($vehicle_id);
-
-
 
         // Get vehicle spendings
         $vehicleSpendings = $this->spendingModel->getVehicleSpendings($vehicle_id);
@@ -52,7 +42,8 @@ class Spendings extends Controller
                 'name' => trim($_POST['name']),
                 'comments' => trim($_POST['comments']),
                 'price' => trim($_POST['price']),
-                'vehicle_id' => $vehicle_id,               
+                'vehicle_id' => $vehicle_id,  
+                'user_id' => $_SESSION['user_id'],             
                 'name_error' => '',
                 'comments_error' => '',
                 'price_error' => ''  
@@ -96,7 +87,8 @@ class Spendings extends Controller
                 'name_error' => '',
                 'comments_error' => '',
                 'price_error' => '',
-                'vehicle_id' => $vehicle_id 
+                'vehicle_id' => $vehicle_id,
+                'user_id' => $_SESSION['user_id']
             ];
     
             $this->view('spendings/add', $data);

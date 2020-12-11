@@ -25,7 +25,7 @@
 
 <?php else : ?>     
     
-    <table class="table table-striped">
+    <table class="table table-striped mb-5">
         <thead>
             <tr class="table-dark">
                 <th class="pl-4">Name</th>
@@ -47,12 +47,7 @@
                         <td class="pl-3">
                             <a href="<?php echo URLROOT; ?>/spendings/edit/<?php echo $spend->id; ?>/<?php echo $data['vehicle']->id; ?>"><i class="fas fa-edit"></i></a>
                         </td>
-                        <td class="pl-3">
-                            <!-- <form class="float-right" action="<?php echo URLROOT; ?>/spendings/delete/<?php echo $spend->id; ?>/<?php echo $data['vehicle']->id; ?>" method="POST">                          
-                                <button class="btn" type="submit"><i class="fas fa-trash-alt text-danger"></i></button>
-                            </form>                         -->
-
-                             <!-- Icon trigger modal -->
+                        <td class="pl-3">                           
                             <i 
                                 class="fas fa-trash-alt text-danger" 
                                 id="delete-spending-icon" 
@@ -63,7 +58,7 @@
                             
                         </td>
                     <?php endif; ?>
-                    </tr>
+                </tr>
 
             <?php endforeach; ?>
         </tbody>

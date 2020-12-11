@@ -154,4 +154,18 @@ class Vehicle
             return false;
         }
     }
+
+    public function deleteAllUserVehicles($user_id)
+    {
+        $this->db->query('DELETE from vehicle_info WHERE user_id = :user_id');
+
+        $this->db->bind(':user_id', $user_id);
+
+        // Execute delete query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

@@ -33,3 +33,12 @@ function isLoggedIn()
         return false;
     }
 }
+
+function checkSessionExpire(){
+    // Check expiretion time and logout if expired
+    if(isset($_SESSION['expire']) && $_SESSION['expire'] < time()){      
+        return true;
+    } else {
+        return false;
+    }
+}

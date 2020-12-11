@@ -36,12 +36,14 @@ class Spending
             name, 
             price, 
             comments,            
-            vehicle_id
+            vehicle_id,
+            user_id
             ) VALUES (
                 :name, 
                 :price,
                 :comments, 
-                :vehicle_id
+                :vehicle_id,
+                :user_id
                 )
         ');
 
@@ -50,6 +52,7 @@ class Spending
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':comments', $data['comments']);
         $this->db->bind(':vehicle_id', $data['vehicle_id']);     
+        $this->db->bind(':user_id', $data['user_id']);     
 
         // Execute insert query
         if ($this->db->execute()) {
@@ -108,11 +111,11 @@ class Spending
         }
     }
 
-    public function deleteAllVehicleSpendings($vehicle_id)
+    public function deleteAllUserSpendings($user_id)
     {
-        $this->db->query('DELETE from spendings WHERE vehicle_id = :vehicle_id');
+        $this->db->query('DELETE from spendings WHERE user_id = :user_id');
 
-        $this->db->bind(':vehicle_id', $vehicle_id);
+        $this->db->bind(':user_id', $user_id);
 
         // Execute delete query
         if ($this->db->execute()) {

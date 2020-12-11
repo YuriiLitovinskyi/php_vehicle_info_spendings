@@ -1,6 +1,6 @@
 <?php require APPROOT . '/views/inc/header.php'; ?>
 <a href="<?php echo URLROOT ?>/spendings/show/<?php echo $data['vehicle_id']; ?>" class="btn btn-link"><i class="fa fa-backward"></i> Back</a>
-<div class="card card-body bg-light my-5 form-card">
+<div class="card card-body bg-light my-5 form-card"> 
     <h2>Add New Item to Spendings</h2>
     <p>You can add new item for your vehicle here</p>
     <form action="<?php echo URLROOT; ?>/spendings/add/<?php echo $data['vehicle_id']; ?>" method="POST">
