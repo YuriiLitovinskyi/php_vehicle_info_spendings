@@ -14,12 +14,18 @@ a.jumbo-link:hover {
   cursor: pointer;
 }
 
-.fa-trash-alt, .fa-edit {
+.delete-item,
+.edit-item {
   display: block;
   margin: auto;
 }
-  
-.fa-trash-alt:hover, .fa-edit:hover {
+
+.delete-item:hover,
+.edit-item:hover {
   cursor: pointer;
-  font-size: 1.2rem;  
+  font-size: 1.2rem;
+}
+
+.spending-items-table td {
+  font-size: 0.8rem;
 }

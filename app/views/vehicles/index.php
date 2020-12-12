@@ -6,18 +6,18 @@
     </div>
     <div class="col-md-6">
         <a href="<?php echo URLROOT; ?>/vehicles/add" class="btn btn-primary float-right">
-        <i class="fas fa-plus"></i> Add New Vehicle
+            <i class="fas fa-plus"></i> Add New Vehicle
         </a>
     </div>
 </div>
 
-<?php if(empty($data['vehicles'])) : ?>
-   
-   <div class="text-center">
-       <h2 class="my-5">You haven't added any vehicles yet</h2>   
-   </div>
+<?php if (empty($data['vehicles'])) : ?>
 
-<?php else : ?> 
+    <div class="text-center">
+        <h2 class="my-5">You haven't added any vehicles yet</h2>
+    </div>
+
+<?php else : ?>
 
     <?php foreach ($data['vehicles'] as $vehicle) : ?>
         <div class="card card-body mb-3">
@@ -34,16 +34,16 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <a href="<?php echo URLROOT; ?>/spendings/show/<?php echo $vehicle->vehicleId; ?>">
+                    <a href="<?php echo URLROOT; ?>/spendings/show/<?php echo $vehicle->vehicleId; ?>/1">
                         <button type="button" class="btn btn-success"><i class="fas fa-money-bill-wave"></i> Monitor Spendings</button>
-                    </a>     
+                    </a>
                     <a href="<?php echo URLROOT; ?>/vehicles/show/<?php echo $vehicle->vehicleId; ?>">
                         <button type="button" class="btn btn-info"><i class="fas fa-car"></i> See More Info</button>
-                    </a>           
-                </div>           
+                    </a>
+                </div>
             </div>
-        
+
         </div>
     <?php endforeach; ?>
-    <?php endif; ?> 
+<?php endif; ?>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

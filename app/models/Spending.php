@@ -8,11 +8,13 @@ class Spending
         $this->db = new Database;
     }
 
-    public function getVehicleSpendings($vehicle_id)
+    public function getVehicleSpendings($vehicle_id, $offset, $spendingsRowsPerPage)
     {
-        $this->db->query('SELECT * FROM spendings WHERE vehicle_id = :vehicle_id');
+        $this->db->query('SELECT * FROM spendings WHERE vehicle_id = :vehicle_id ORDER BY spendings.id DESC LIMIT :spendingsRowsPerPage OFFSET :offset');
 
         $this->db->bind(':vehicle_id', $vehicle_id);
+        $this->db->bind(':offset', intval($offset));
+        $this->db->bind(':spendingsRowsPerPage', intval($spendingsRowsPerPage));
 
         $results = $this->db->resultSet();
 
@@ -51,8 +53,8 @@ class Spending
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':price', $data['price']);
         $this->db->bind(':comments', $data['comments']);
-        $this->db->bind(':vehicle_id', $data['vehicle_id']);     
-        $this->db->bind(':user_id', $data['user_id']);     
+        $this->db->bind(':vehicle_id', $data['vehicle_id']);
+        $this->db->bind(':user_id', $data['user_id']);
 
         // Execute insert query
         if ($this->db->execute()) {
@@ -76,7 +78,7 @@ class Spending
         $this->db->bind(':id', $data['id']);
         $this->db->bind(':name', $data['name']);
         $this->db->bind(':price', $data['price']);
-        $this->db->bind(':comments', $data['comments']);         
+        $this->db->bind(':comments', $data['comments']);
 
         // Execute insert query
         if ($this->db->execute()) {
@@ -123,5 +125,17 @@ class Spending
         } else {
             return false;
         }
+    }
+
+    public function getNumberOfSpendingsRows($vehicle_id)
+    {
+        $this->db->query('SELECT COUNT(*) AS total_spend_rows FROM spendings WHERE vehicle_id = :vehicle_id');
+
+        $this->db->bind(':vehicle_id', $vehicle_id);
+
+        $numOfRows = $this->db->resultSet();
+        //$count = $this->db->rowCount();
+
+        return $numOfRows;
     }
 }

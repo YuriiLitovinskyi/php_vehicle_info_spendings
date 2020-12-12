@@ -20,8 +20,8 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['user_name']; ?>'s Profile</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown01">
-                        <a class="dropdown-item text-info font-weight-bold" href="<?php echo URLROOT; ?>/users/edit/<?php echo $_SESSION['user_id']; ?>"><i class="fas fa-user"></i> Edit Profile</a>                        
-                        <a class="dropdown-item text-danger font-weight-bold" data-toggle="modal" data-target="#deleteUser" href="#" ><i class="fas fa-user-alt-slash"></i> Delete Profile</a>                   
+                            <a class="dropdown-item text-info font-weight-bold" href="<?php echo URLROOT; ?>/users/edit/<?php echo $_SESSION['user_id']; ?>"><i class="fas fa-user"></i> Edit Profile</a>
+                            <a class="dropdown-item text-danger font-weight-bold" data-toggle="modal" data-target="#deleteUser" href="#"><i class="fas fa-user-alt-slash"></i> Delete Profile</a>
                         </div>
                     </li>
 
@@ -36,7 +36,7 @@
                                 <div class="modal-header">
                                     <h5 class="modal-title" id="deleteUserLabel">Delete your current Profile?</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
+                                        <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
@@ -46,7 +46,7 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                                     <form class="float-right" action="<?php echo URLROOT; ?>/users/delete/<?php echo $_SESSION['user_id']; ?>" method="POST">
-                                        <button type="submit" class="btn btn-danger">Delete</button>                      
+                                        <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="<?php echo URLROOT; ?>/users/login">Login <i class="fas fa-sign-in-alt"></i></a>
                     </li>
-                <?php endif; ?>                
+                <?php endif; ?>
             </ul>
         </div>
     </div>
