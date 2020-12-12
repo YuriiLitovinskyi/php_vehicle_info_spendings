@@ -82,14 +82,22 @@ class Spendings extends Controller
             // Validate input values
             if (empty($data['name'])) {
                 $data['name_error'] = 'Please enter name of the item';
+            } else if (strlen($data['name']) < 3 || strlen($data['name']) > 16) {
+                $data['name_error'] = 'Length must be between 3 and 16 symbols';
             }
 
             if (empty($data['price'])) {
                 $data['price_error'] = 'Please enter price of the item';
+            } else if (!is_numeric($data['price'])) {
+                $data['price_error'] = 'Price value must be a number';
+            } else if ($data['price'] < 0 || $data['price'] > 9999999) {
+                $data['price_error'] = 'Value length must be greate then 0 and less then 9999999';
             }
 
             if (empty($data['comments'])) {
                 $data['comments_error'] = 'Please leave some comments about the item';
+            } else if (strlen($data['comments']) > 120) {
+                $data['comments_error'] = 'Comments length must be less then 120 symbols';
             }
 
             // Make sure no errors
@@ -143,14 +151,22 @@ class Spendings extends Controller
             // Validate input values
             if (empty($data['name'])) {
                 $data['name_error'] = 'Please enter name of the item';
+            } else if (strlen($data['name']) < 3 || strlen($data['name']) > 16) {
+                $data['name_error'] = 'Length must be between 3 and 16 symbols';
             }
 
             if (empty($data['price'])) {
                 $data['price_error'] = 'Please enter price of the item';
+            } else if (!is_numeric($data['price'])) {
+                $data['price_error'] = 'Price value must be a number';
+            } else if ($data['price'] < 0 || $data['price'] > 9999999) {
+                $data['price_error'] = 'Value length must be greate then 0 and less then 9999999';
             }
 
             if (empty($data['comments'])) {
                 $data['comments_error'] = 'Please leave some comments about the item';
+            } else if (strlen($data['comments']) > 120) {
+                $data['comments_error'] = 'Comments length must be less then 120 symbols';
             }
 
             // Make sure no errors

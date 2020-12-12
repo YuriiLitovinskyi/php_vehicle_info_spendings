@@ -19,7 +19,7 @@
 
         <div class="form-group">
             <label for="year_production">Vehicle Year Production: <sup>*</sup></label>
-            <input type="number" min="1900" max="2099" step="1" name="year_production" class="form-control form-control <?php echo (!empty($data['year_production_error'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['year_production']; ?>">
+            <input type="number" name="year_production" class="form-control form-control <?php echo (!empty($data['year_production_error'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['year_production']; ?>">
             <span class="invalid-feedback"><?php echo $data['year_production_error']; ?></span>
         </div>
 
@@ -30,32 +30,32 @@
         </div>
 
         <div class="form-group">
-            <label for="fuel">Vehicle Fuel Type: <sup>*</sup></label>          
+            <label for="fuel">Vehicle Fuel Type: <sup>*</sup></label>
             <select name="fuel" class="custom-select <?php echo (!empty($data['fuel_error'])) ? 'is-invalid' : ''; ?>">
-                <option selected value="<?php echo (!empty($data['fuel_error'])) ? '' : $data['fuel']; ?>"><?php echo (empty($data['fuel'])) ? 'Select fuel type' : $data['fuel']; ?></option>               
+                <option selected value="<?php echo (!empty($data['fuel_error'])) ? '' : $data['fuel']; ?>"><?php echo (empty($data['fuel'])) ? 'Select fuel type' : $data['fuel']; ?></option>
                 <?php echo ($data['fuel'] == 'Gasoline' ? '' : '<option value="Gasoline">Gasoline</option>') ?>
                 <?php echo ($data['fuel'] == 'Diesel' ? '' : '<option value="Diesel">Diesel</option>') ?>
                 <?php echo ($data['fuel'] == 'Gas' ? '' : '<option value="Gas">Gas</option>') ?>
-                <?php echo ($data['fuel'] == 'Other' ? '' : '<option value="Other">Other</option>') ?>                    
+                <?php echo ($data['fuel'] == 'Other' ? '' : '<option value="Other">Other</option>') ?>
             </select>
-            <span class="invalid-feedback"><?php echo $data['fuel_error']; ?></span>       
+            <span class="invalid-feedback"><?php echo $data['fuel_error']; ?></span>
         </div>
 
         <div class="form-group">
-            <label for="transmission">Vehicle Transmission Type: <sup>*</sup></label>            
-            <select name="transmission" class="custom-select <?php echo (!empty($data['transmission_error'])) ? 'is-invalid' : ''; ?>"> 
-                <option selected value="<?php echo (!empty($data['transmission_error'])) ? '' : $data['transmission']; ?>"><?php echo (empty($data['transmission'])) ? 'Select transmission type' : $data['transmission']; ?></option>              
+            <label for="transmission">Vehicle Transmission Type: <sup>*</sup></label>
+            <select name="transmission" class="custom-select <?php echo (!empty($data['transmission_error'])) ? 'is-invalid' : ''; ?>">
+                <option selected value="<?php echo (!empty($data['transmission_error'])) ? '' : $data['transmission']; ?>"><?php echo (empty($data['transmission'])) ? 'Select transmission type' : $data['transmission']; ?></option>
                 <?php echo ($data['transmission'] == 'Manual' ? '' : '<option value="Manual">Manual</option>') ?>
                 <?php echo ($data['transmission'] == 'Automatic' ? '' : '<option value="Automatic">Automatic</option>') ?>
                 <?php echo ($data['transmission'] == 'Continuously Variable' ? '' : '<option value="Continuously Variable">Continuously Variable</option>') ?>
-                <?php echo ($data['transmission'] == 'Other' ? '' : '<option value="Other">Other</option>') ?>                 
+                <?php echo ($data['transmission'] == 'Other' ? '' : '<option value="Other">Other</option>') ?>
             </select>
             <span class="invalid-feedback"><?php echo $data['transmission_error']; ?></span>
         </div>
 
         <div class="form-group">
-            <label for="configuration">Vehicle Body Type: <sup>*</sup></label>            
-            <select name="configuration" class="custom-select <?php echo (!empty($data['configuration_error'])) ? 'is-invalid' : ''; ?>">   
+            <label for="configuration">Vehicle Body Type: <sup>*</sup></label>
+            <select name="configuration" class="custom-select <?php echo (!empty($data['configuration_error'])) ? 'is-invalid' : ''; ?>">
                 <option selected value="<?php echo (!empty($data['configuration_error'])) ? '' : $data['configuration']; ?>"><?php echo (empty($data['configuration'])) ? 'Select configuration type' : $data['configuration']; ?></option>
                 <?php echo ($data['configuration'] == 'Sedan' ? '' : '<option value="Sedan">Sedan</option>') ?>
                 <?php echo ($data['configuration'] == 'Hatchback' ? '' : '<option value="Hatchback">Hatchback</option>') ?>
@@ -65,7 +65,7 @@
                 <?php echo ($data['configuration'] == 'Convertible' ? '' : '<option value="Convertible">Convertible</option>') ?>
                 <?php echo ($data['configuration'] == 'Sport-utility' ? '' : '<option value="Sport-utility">Sport-utility</option>') ?>
                 <?php echo ($data['configuration'] == 'Pichup' ? '' : '<option value="Pichup">Pichup</option>') ?>
-                <?php echo ($data['configuration'] == 'Other' ? '' : '<option value="Other">Other</option>') ?>                
+                <?php echo ($data['configuration'] == 'Other' ? '' : '<option value="Other">Other</option>') ?>
             </select>
             <span class="invalid-feedback"><?php echo $data['configuration_error']; ?></span>
         </div>
@@ -86,7 +86,7 @@
             <label for="color">Vehicle Color:</label>
             <input type="text" name="color" class="form-control form-control <?php echo (!empty($data['color_error'])) ? 'is-invalid' : ''; ?>" value="<?php echo $data['color']; ?>">
             <span class="invalid-feedback"><?php echo $data['color_error']; ?></span>
-        </div>        
+        </div>
 
         <div class="form-group">
             <label for="vehicle_mass">Vehicle Mass (kg):</label>
@@ -100,7 +100,7 @@
             <span class="invalid-feedback"><?php echo $data['maximum_mass_error']; ?></span>
         </div>
 
-        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save Vehicle</button>        
+        <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Save Vehicle</button>
     </form>
 </div>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

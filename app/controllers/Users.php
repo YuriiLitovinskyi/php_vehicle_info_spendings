@@ -2,10 +2,10 @@
 class Users extends Controller
 {
     public function __construct()
-    {  
+    {
         $this->userModel = $this->model('User');
         $this->vehicleModel = $this->model('Vehicle');
-        $this->spendingModel = $this->model('Spending');      
+        $this->spendingModel = $this->model('Spending');
     }
 
     public function index()
@@ -46,6 +46,8 @@ class Users extends Controller
             // Validate email
             if (empty($data['email'])) {
                 $data['email_error'] = 'Please enter email';
+            } else if (strlen($data['email']) > 60) {
+                $data['email_error'] = 'Email can contain maximum 60 characters';
             } else {
                 // Check if email exists in DB
                 if ($this->userModel->findUserByEmail($data['email'])) {
@@ -152,7 +154,7 @@ class Users extends Controller
 
                 if ($loggedInUser) {
                     // Create Session                  
-                    $this->createUserSession($loggedInUser);                 
+                    $this->createUserSession($loggedInUser);
                 } else {
                     $data['password_error'] = 'Wrong password! Please try again';
 
@@ -182,7 +184,7 @@ class Users extends Controller
         $_SESSION['user_id'] = $user->id;
         $_SESSION['user_email'] = $user->email;
         $_SESSION['user_name'] = $user->name;
-        $_SESSION['expire'] = time() + (SESSIONEXPIRE * 24 * 60 * 60 );  // 30 days
+        $_SESSION['expire'] = time() + (SESSIONEXPIRE * 24 * 60 * 60);  // 30 days
         redirect('vehicles');
     }
 
@@ -203,11 +205,11 @@ class Users extends Controller
         } else {
             return false;
         }
-    }    
+    }
 
     public function edit($id)
-    {     
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {         
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Sanitize POST data
             $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
@@ -271,12 +273,11 @@ class Users extends Controller
                 // Update User
                 if ($this->userModel->editProfile($data)) {
                     // User was updated
-                    $this->logout(); 
+                    $this->logout();
                     flash('profile_change', 'Profile was successfully updated. You can log in now with new credentials');  // Not working after logout()  
                 } else {
                     die('An error occurred! Could not update user profile info!');
-                };               
-
+                };
             } else {
                 // Load view with errors             
                 $this->view('users/edit', $data);
@@ -286,7 +287,7 @@ class Users extends Controller
             $user = $this->userModel->getUserById($id);
 
             // Check for owner
-            if ($user->id != $_SESSION['user_id']) {              
+            if ($user->id != $_SESSION['user_id']) {
                 redirect('vehicles');
             }
 
@@ -312,23 +313,23 @@ class Users extends Controller
     {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Get existing User from model
-        $user = $this->userModel->getUserById($id);
+            $user = $this->userModel->getUserById($id);
 
-        // Check for owner
-        if ($user->id != $_SESSION['user_id']) {           
-            redirect('vehicles');
-        }
-          
-        if ($this->userModel->deleteUserProfile($id) && $this->vehicleModel->deleteAllUserVehicles($id) && $this->spendingModel->deleteAllUserSpendings($id)) {
-            $this->logout(); 
-            flash('profile_change', 'Your Profile, vehicles and spendings were deleted successfully');  // Not working after logout()  
+            // Check for owner
+            if ($user->id != $_SESSION['user_id']) {
+                redirect('vehicles');
+            }
+
+            if ($this->userModel->deleteUserProfile($id) && $this->vehicleModel->deleteAllUserVehicles($id) && $this->spendingModel->deleteAllUserSpendings($id)) {
+                $this->logout();
+                flash('profile_change', 'Your Profile, vehicles and spendings were deleted successfully');  // Not working after logout()  
+            } else {
+                flash('profile_change', 'Error! Could not delete profile! Please try again', 'alert alert-danger');
+                redirect('vehicles');
+                //die('Error! Could not delete vehicle!');
+            }
         } else {
-            flash('profile_change', 'Error! Could not delete profile! Please try again', 'alert alert-danger');
             redirect('vehicles');
-            //die('Error! Could not delete vehicle!');
         }
-    } else {
-        redirect('vehicles');
-    }
     }
 }
