@@ -20,13 +20,43 @@ class Vehicles extends Controller
         $this->spendingModel = $this->model('Spending');
     }
 
-    public function index()
+    public function index($pageNumber = 1)
     {
-        // Get users vehicles
-        $vehicles = $this->vehicleModel->getUsersVehicles($_SESSION['user_id']);
+        // Get users vehicles with pagination     
+        // Number vehicle rows, which belong to user
+        $numberOfVehiclesRows = $this->vehicleModel->getNumberOfVehiclesRows($_SESSION['user_id']);
+
+        // Nember of vehicles items per page
+        $vehiclesRowsPerPage = 2;
+
+        // Total pages number of pages 
+        $totalPages = ceil((int)$numberOfVehiclesRows[0]->total_veh_rows / $vehiclesRowsPerPage);
+
+        // Set current page
+        if (isset($pageNumber) && is_numeric($pageNumber)) {
+            $currentPage = (int)$pageNumber;
+        } else {
+            $currentPage = 1;
+        }
+
+        // validate current page
+        if ($currentPage > $totalPages) {
+            $currentPage = $totalPages;
+        }
+        if ($currentPage < 1) {
+            $currentPage = 1;
+        }
+
+        // the offset of the list, based on current page 
+        $offset = ($currentPage - 1) * $vehiclesRowsPerPage;
+
+        // Get users vehicles        
+        $vehicles = $this->vehicleModel->getUsersVehicles($_SESSION['user_id'], $offset, $vehiclesRowsPerPage);
 
         $data = [
-            'vehicles' => $vehicles
+            'vehicles' => $vehicles,
+            'current_page' => $currentPage,
+            'total_pages' => $totalPages
         ];
 
         $this->view('vehicles/index', $data);
@@ -348,14 +378,17 @@ class Vehicles extends Controller
     public function show($id)
     {
         $vehicle = $this->vehicleModel->getVehicleById($id);
-        $user = $this->userModel->getUserById($vehicle->user_id);
-
-        $data = [
-            'vehicle' => $vehicle,
-            'user' => $user
-        ];
-
-        $this->view('vehicles/show', $data);
+        if ($vehicle) {
+            $user = $this->userModel->getUserById($vehicle->user_id);
+            $data = [
+                'vehicle' => $vehicle,
+                'user' => $user
+            ];
+            $this->view('vehicles/show', $data);
+        } else {
+            $data = [];
+            $this->view('vehicles/show', $data);
+        }
     }
 
     public function delete($id)

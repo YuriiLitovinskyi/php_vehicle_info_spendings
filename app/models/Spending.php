@@ -127,6 +127,20 @@ class Spending
         }
     }
 
+    public function deleteAllVehicleSpendings($vehicle_id)
+    {
+        $this->db->query('DELETE from spendings WHERE vehicle_id = :vehicle_id');
+
+        $this->db->bind(':vehicle_id', $vehicle_id);
+
+        // Execute delete query
+        if ($this->db->execute()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function getNumberOfSpendingsRows($vehicle_id)
     {
         $this->db->query('SELECT COUNT(*) AS total_spend_rows FROM spendings WHERE vehicle_id = :vehicle_id');

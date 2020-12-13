@@ -35,15 +35,36 @@
             <div class="row">
                 <div class="col-md-12">
                     <a href="<?php echo URLROOT; ?>/spendings/show/<?php echo $vehicle->vehicleId; ?>/1">
-                        <button type="button" class="btn btn-success"><i class="fas fa-money-bill-wave"></i> Monitor Spendings</button>
+                        <button type="button" class="btn btn-success m-1"><i class="fas fa-money-bill-wave"></i> Monitor Spendings</button>
                     </a>
                     <a href="<?php echo URLROOT; ?>/vehicles/show/<?php echo $vehicle->vehicleId; ?>">
-                        <button type="button" class="btn btn-info"><i class="fas fa-car"></i> See More Info</button>
+                        <button type="button" class="btn btn-info m-1"><i class="fas fa-car"></i> See More Info</button>
                     </a>
                 </div>
             </div>
 
         </div>
     <?php endforeach; ?>
+
+    <div class="d-flex justify-content-center">
+        <ul class="pagination">
+            <li class="page-item<?php echo $data['current_page'] == 1 ? ' disabled' : '' ?>">
+                <a class="page-link" href="<?php echo URLROOT; ?>/vehicles/<?php echo $data['current_page'] - 1; ?>" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+            <?php if ($data['current_page'] != 1) : ?>
+                <li class="page-item"><a class="page-link" href="<?php echo URLROOT; ?>/vehicles/1">1</a></li>
+            <?php endif; ?>
+
+            <li class="page-item active"><a class="page-link" href="#"><?php echo $data['current_page']; ?> of <?php echo $data['total_pages']; ?></a></li>
+
+            <?php if ($data['current_page'] !=  $data['total_pages']) : ?>
+                <li class="page-item"><a class="page-link" href="<?php echo URLROOT; ?>/vehicles/<?php echo $data['total_pages']; ?>"><?php echo $data['total_pages']; ?></a></li>
+            <?php endif; ?>
+
+            <li class="page-item<?php echo $data['current_page'] ==  $data['total_pages'] ? ' disabled' : '' ?>">
+                <a class="page-link" href="<?php echo URLROOT; ?>/vehicles/<?php echo $data['current_page'] + 1; ?>">Next</a>
+            </li>
+        </ul>
+    </div>
 <?php endif; ?>
 <?php require APPROOT . '/views/inc/footer.php'; ?>

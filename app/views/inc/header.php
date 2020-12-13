@@ -18,4 +18,4 @@
 
 <body>
     <?php require APPROOT . '/views/inc/navbar.php'; ?>
-    <div class="container">
+    <div class="container mb-4">

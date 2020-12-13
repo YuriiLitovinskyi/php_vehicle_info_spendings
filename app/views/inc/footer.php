@@ -11,11 +11,11 @@
 
 <script src="<?php echo URLROOT; ?>/js/main.js"></script>
 
-<div class="text-muted fixed-bottom mt-5 bg-dark">
+<!-- <div class="text-muted fixed-bottom mt-5 bg-dark">
     <div class="container py-3">
         <small>&copy; Copyright 2020, Vehicle Info App</small>
     </div>
-</div>
+</div> -->
 
 </body>
 

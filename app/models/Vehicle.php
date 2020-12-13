@@ -1,5 +1,5 @@
 <?php
-class Vehicle 
+class Vehicle
 {
     private $db;
 
@@ -8,9 +8,8 @@ class Vehicle
         $this->db = new Database;
     }
 
-    public function getUsersVehicles($user_id)
-    {        
-        
+    public function getUsersVehicles($user_id, $offset, $vehiclesRowsPerPage)
+    {
         $this->db->query('SELECT *,
             vehicle_info.id as vehicleId,
             vehicle_info.name as vehicleName,
@@ -22,15 +21,29 @@ class Vehicle
             ON vehicle_info.user_id = users.id
             WHERE users.id = :user_id
             ORDER BY vehicle_info.created_at DESC
+            LIMIT :vehiclesRowsPerPage OFFSET :offset
         ');  // all users vehicles
 
 
         // Bind values       
-         $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':user_id', $user_id);
+        $this->db->bind(':offset', intval($offset));
+        $this->db->bind(':vehiclesRowsPerPage', intval($vehiclesRowsPerPage));
 
         $results = $this->db->resultSet();
 
         return $results;
+    }
+
+    public function getNumberOfVehiclesRows($user_id)
+    {
+        $this->db->query('SELECT COUNT(*) AS total_veh_rows FROM vehicle_info WHERE user_id = :user_id');
+
+        $this->db->bind(':user_id', $user_id);
+
+        $numOfRows = $this->db->resultSet();
+
+        return $numOfRows;
     }
 
     public function addVehicle($data)
@@ -88,7 +101,7 @@ class Vehicle
             return false;
         }
     }
-    
+
     public function updateVehicle($data)
     {
         $this->db->query('UPDATE vehicle_info SET
