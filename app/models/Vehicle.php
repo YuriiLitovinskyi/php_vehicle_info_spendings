@@ -6,6 +6,13 @@ class Vehicle
     public function __construct()
     {
         $this->db = new Database;
+        //echo 'vehicles constructor';
+    }
+
+    public function __destruct()
+    {
+        $this->db = null;
+        //echo 'vehicles destructor';
     }
 
     public function getUsersVehicles($user_id, $offset, $vehiclesRowsPerPage)

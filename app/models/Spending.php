@@ -6,6 +6,13 @@ class Spending
     public function __construct()
     {
         $this->db = new Database;
+        //echo 'spendings costructor';
+    }
+
+    public function __destruct()
+    {
+        $this->db = null;
+        //echo 'spendings destructor';
     }
 
     public function getVehicleSpendings($vehicle_id, $offset, $spendingsRowsPerPage)
